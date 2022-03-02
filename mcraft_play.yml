@@ -1,26 +1,27 @@
 ---
 
-- hosts: all
+- hosts: localhost
 
   vars:
     upgradecmd: wget -O /home/admin/Downloads/mcraft_play.yml https://raw.githubusercontent.com/jorg-j/ansibleminecraft/main/mcraft_play.yml; ansible-playbook /home/admin/Downloads/mcraft_play.yml
-    install_deb: true
-
+    install_mcraft: false
   tasks:
 
-  - name: adding alias for easier upgrades
-    ansible.builtin.lineinfile:
-      path: /home/admin/.bashrc
-      regexp: '^alias mcraft'
-      line: 'alias mcraft="{{ upgradecmd }}"'
+  - name: Ensure Alias in bashrc
+    lineinfile:
+      path: /home/pi/.bashrc
+      line: 'alias mcupgrade="{{ upgradecmd }}"'
+      state: present
 
   - name: Downloading minecraft deb file
     get_url:
       url: https://launcher.mojang.com/download/Minecraft.deb
-      dest: /home/pi/Downloads/Minecraft.deb
+      dest: /home/admin/Downloads/Minecraft.deb
+    when: install_mcraft | bool
   
   - name: Install Minecraft .deb package
+    become: true
     apt:
-      deb: /home/pi/Downloads/Minecraft.deb
-    when: install_deb | bool
+      deb: /home/admin/Downloads/Minecraft.deb
+    when: install_mcraft | bool
 
