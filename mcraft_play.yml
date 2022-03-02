@@ -11,18 +11,17 @@
     install_discord: true
   tasks:
   
-  
-  - name: Update all packages to their latest version
-    become: true
-    apt:
-      name: "*"
-      state: latest
-      update_cache: yes
 
-  - name: Ensure Alias in bashrc
+  - name: Ensure Alias in bashrc mcupgrade
     lineinfile:
       path: /home/m/.bashrc
       line: 'alias mcupgrade="{{ upgradecmd }}"'
+      state: present
+
+  - name: Ensure Alias in bashrc update
+    lineinfile:
+      path: /home/m/.bashrc
+      line: 'alias ud="sudo apt update && sudo apt upgrade -y"'
       state: present
 
   - name: Downloading minecraft deb file
