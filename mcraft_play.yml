@@ -3,7 +3,8 @@
 - hosts: all
 
   vars:
-    upgradecmd: foo bar
+    upgradecmd: wget -O /home/admin/Downloads/mcraft_play.yml https://raw.githubusercontent.com/jorg-j/ansibleminecraft/main/mcraft_play.yml; ansible-playbook /home/admin/Downloads/mcraft_play.yml
+    install_deb: true
 
   tasks:
 
@@ -22,4 +23,5 @@
   - name: Install Minecraft .deb package
     apt:
       deb: /home/pi/Downloads/Minecraft.deb
+    when: install_deb | bool
 
