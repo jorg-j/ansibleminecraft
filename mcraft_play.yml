@@ -11,10 +11,12 @@
     install_discord: true
   tasks:
   
-  - name: update/upgrade system
+  
+  - name: Update all packages to their latest version
     become: true
     apt:
-      upgrade: dist
+      name: "*"
+      state: latest
       update_cache: yes
 
   - name: Ensure Alias in bashrc
