@@ -11,7 +11,6 @@
   - name: adding alias for easier upgrades
     ansible.builtin.lineinfile:
       path: /home/admin/.bashrc
-      state: present
       regexp: '^alias mcraft'
       line: 'alias mcraft="{{ upgradecmd }}"'
 
