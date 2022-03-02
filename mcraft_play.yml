@@ -4,12 +4,12 @@
 
   vars:
     upgradecmd: wget -O /home/admin/Downloads/mcraft_play.yml https://raw.githubusercontent.com/jorg-j/ansibleminecraft/main/mcraft_play.yml; ansible-playbook /home/admin/Downloads/mcraft_play.yml
-    install_mcraft: false
+    install_mcraft: true
   tasks:
 
   - name: Ensure Alias in bashrc
     lineinfile:
-      path: /home/pi/.bashrc
+      path: /home/admin/.bashrc
       line: 'alias mcupgrade="{{ upgradecmd }}"'
       state: present
 
