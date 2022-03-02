@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+
+  vars:
+    upgradecmd: foo bar
+
+  tasks:
+
+  - name: adding alias for easier upgrades
+    ansible.builtin.lineinfile:
+      path: /home/admin/.bashrc
+      state: present
+      regexp: '^alias mcraft'
+      line: 'alias mcraft="{{ upgradecmd }}"'
+
+  - name: Downloading minecraft deb file
+    get_url:
+      url: https://launcher.mojang.com/download/Minecraft.deb
+      dest: /home/pi/Downloads/Minecraft.deb
+  
+  - name: Install Minecraft .deb package
+    apt:
+      deb: /home/pi/Downloads/Minecraft.deb
+
