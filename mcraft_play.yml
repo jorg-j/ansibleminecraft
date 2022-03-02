@@ -6,6 +6,12 @@
     upgradecmd: wget -O /home/m/Downloads/mcraft_play.yml https://raw.githubusercontent.com/jorg-j/ansibleminecraft/main/mcraft_play.yml; ansible-playbook /home/m/Downloads/mcraft_play.yml
     install_mcraft: true
   tasks:
+  
+  - name: update/upgrade system
+    become: true
+    apt:
+      upgrade: dist
+      update_cache: yes
 
   - name: Ensure Alias in bashrc
     lineinfile:
