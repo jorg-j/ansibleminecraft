@@ -13,4 +13,4 @@ sudo apt install ansible git -y
 wget -O /home/$USER/Downloads/mcraft_play.yml https://raw.githubusercontent.com/jorg-j/ansibleminecraft/main/mcraft_play.yml
 
 
-ansible-playbook /home/pi/Downloads/mcraft_play.yml
+ansible-playbook /home/$USER/Downloads/mcraft_play.yml
